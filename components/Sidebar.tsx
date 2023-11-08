@@ -26,7 +26,7 @@ export default function Sidebar() {
             href="/dashboard"
             className={clsx(
               "flex items-center gap-5 rounded-md p-3 hover:bg-gray-100 dark:hover:bg-slate-700",
-              pathname === "/dashboard" && "bg-gray-100 dark:bg-slate-700",
+              pathname === "/dashboard" && "bg-gray-200 dark:bg-slate-700",
             )}
           >
             <PresentationChartBarIcon className="h-7 w-7 md:h-5 md:w-5" />
@@ -37,7 +37,7 @@ export default function Sidebar() {
             className={clsx(
               "flex items-center gap-5 rounded-md p-3 hover:bg-gray-100 dark:hover:bg-slate-700",
               pathname === "/dashboard/new-task" &&
-                "bg-gray-100 dark:bg-slate-700",
+                "bg-gray-200 dark:bg-slate-700",
             )}
           >
             <PlusIcon className="h-7 w-7 md:h-5 md:w-5" />
