@@ -1,10 +1,18 @@
+import { authOptions } from "@/auth";
 import Sidebar from "@/components/Sidebar";
+import { getServerSession } from "next-auth";
 
-export default function layout({ children }: { children: React.ReactNode }) {
+export default async function layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const session = await getServerSession(authOptions);
+
   return (
-    <div className="flex flex-col md:flex-row">
-      <Sidebar />
-      <div className="flex-grow p-6 md:overflow-y-auto md:p-12">{children}</div>
+    <div className="flex flex-col lg:flex-row">
+      <Sidebar session={session} />
+      <div className="flex-grow p-6 lg:overflow-y-auto lg:p-12">{children}</div>
     </div>
   );
 }
