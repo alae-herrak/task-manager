@@ -15,7 +15,9 @@ export default async function Home() {
         <h1 className="text-4xl font-semibold text-black dark:text-white">
           Task Manager
         </h1>
-        <p className="text-center font-serif text-gray-300">By Alae Herrak</p>
+        <p className="text-center font-serif text-gray-700 dark:text-gray-300">
+          By Alae Herrak
+        </p>
       </div>
       <Link href="/dashboard">
         <Button variant="outline">Sign in</Button>
