@@ -1,6 +1,7 @@
+import { FirestoreAdapter } from "@auth/firebase-adapter";
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-// import CredentialsProvider from "next-auth/providers/credentials";
+import { adminAuth, adminDb } from "./firebase-admin";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -8,24 +9,30 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
-    // CredentialsProvider({
-    //   name: "Credentials",
-    //   credentials: {
-    //     username: { label: "Username", type: "text", placeholder: "jsmith" },
-    //     password: { label: "Password", type: "password" },
-    //   },
-    //   async authorize(credentials, req) {
-    //     const res = await fetch("/your/endpoint", {
-    //       method: "POST",
-    //       body: JSON.stringify(credentials),
-    //       headers: { "Content-Type": "application/json" },
-    //     });
-    //     const user = await res.json();
-    //     if (res.ok && user) {
-    //       return user;
-    //     }
-    //     return null;
-    //   },
-    // }),
   ],
+  callbacks: {
+    session: async ({ session, token }) => {
+      if (session?.user) {
+        if (token.sub) {
+          session.user.id = token.sub;
+
+          const firebaseToken = await adminAuth.createCustomToken(token.sub);
+          session.firebaseToken = firebaseToken;
+        }
+      }
+
+      return session;
+    },
+    jwt: async ({ user, token }) => {
+      if (user) {
+        token.sub = user.id;
+      }
+
+      return token;
+    },
+  },
+  session: {
+    strategy: "jwt",
+  },
+  adapter: FirestoreAdapter(adminDb),
 } satisfies NextAuthOptions;
