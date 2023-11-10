@@ -1,5 +1,5 @@
 import { authOptions } from "@/auth";
-import Breadcrumbs from "@/components/Breadcrumbs";
+import Breadcrumbs from "@/components/breadcrumbs";
 import CreateTaskForm from "@/components/tasks/CreateTaskForm";
 import { getServerSession } from "next-auth";
 

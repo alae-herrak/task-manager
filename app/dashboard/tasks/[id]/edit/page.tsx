@@ -1,7 +1,7 @@
-import Breadcrumbs from "@/components/Breadcrumbs";
 import { fetchTaskById } from "@/lib/data";
 import { notFound } from "next/navigation";
 import EditTaskForm from "@/components/tasks/EditTaskForm";
+import Breadcrumbs from "@/components/breadcrumbs";
 
 export default async function EditTaskPage({
   params,
