@@ -7,5 +7,5 @@ export default async function Tasks() {
   const session = await getServerSession(authOptions);
   const tasks = await fetchUserTasks(session?.user.id || "");
 
-  return <TasksTable tasks={tasks} />;
+  return tasks.length ? <TasksTable tasks={tasks} /> : null;
 }

@@ -42,7 +42,7 @@ export default function TasksTable({ tasks }: { tasks: Task[] }) {
     setSortDirection(sortDirection === "htl" ? "lth" : "htl");
   }
 
-  return tasks ? (
+  return (
     <Table>
       <TableHeader>
         <TableRow>
@@ -102,5 +102,5 @@ export default function TasksTable({ tasks }: { tasks: Task[] }) {
         )}
       </TableBody>
     </Table>
-  ) : null;
+  );
 }
