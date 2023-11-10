@@ -22,7 +22,6 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { editTask } from "@/lib/actions";
-import { Session } from "next-auth";
 import { useState } from "react";
 import { Loader } from "lucide-react";
 import { Task } from "@/lib/definitions";
@@ -48,7 +47,7 @@ const formSchema = z.object({
     }),
 });
 
-function CreateForm({ task }: { task: Task }) {
+export default function EditTaskForm({ task }: { task: Task }) {
   const [creating, setCreating] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -130,5 +129,3 @@ function CreateForm({ task }: { task: Task }) {
     </Form>
   );
 }
-
-export default CreateForm;

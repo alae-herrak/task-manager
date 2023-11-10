@@ -47,7 +47,11 @@ const formSchema = z.object({
     }),
 });
 
-function CreateForm({ session }: { session: Session | null }) {
+export default function CreateTaskForm({
+  session,
+}: {
+  session: Session | null;
+}) {
   const [creating, setCreating] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -129,5 +133,3 @@ function CreateForm({ session }: { session: Session | null }) {
     </Form>
   );
 }
-
-export default CreateForm;

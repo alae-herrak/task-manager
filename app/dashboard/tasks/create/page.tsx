@@ -1,6 +1,6 @@
 import { authOptions } from "@/auth";
-import Breadcrumbs from "@/components/breadcrumbs";
-import Form from "@/components/create-task-form";
+import Breadcrumbs from "@/components/Breadcrumbs";
+import CreateTaskForm from "@/components/tasks/CreateTaskForm";
 import { getServerSession } from "next-auth";
 
 export default async function NewTaskPage() {
@@ -18,7 +18,7 @@ export default async function NewTaskPage() {
           },
         ]}
       />
-      <Form session={session} />
+      <CreateTaskForm session={session} />
     </>
   );
 }

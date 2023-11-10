@@ -9,8 +9,8 @@ import {
   PresentationChartBarIcon,
   ClipboardDocumentListIcon,
 } from "@heroicons/react/24/solid";
-import { ModeToggle } from "./ThemeToggle";
-import UserButton from "./UserButton";
+import { ThemeToggle } from "@/components/sidebar/ThemeToggle";
+import UserButton from "@/components/sidebar/UserButton";
 
 export default function Sidebar({ session }: { session: Session | null }) {
   return (
@@ -20,7 +20,7 @@ export default function Sidebar({ session }: { session: Session | null }) {
           Task Manager
           <div className="flex items-center gap-2">
             <UserButton session={session} />
-            <ModeToggle />
+            <ThemeToggle />
           </div>
         </div>
         {session && (

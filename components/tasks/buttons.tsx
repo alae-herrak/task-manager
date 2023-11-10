@@ -1,8 +1,8 @@
 import { TrashIcon } from "@heroicons/react/24/solid";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { deleteTask } from "@/lib/actions";
 
-export default function DeleteTask({ id }: { id: string }) {
+export default function DeleteTaskButton({ id }: { id: string }) {
   const deleteTaskWithId = deleteTask.bind(null, id);
 
   return (

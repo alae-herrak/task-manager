@@ -18,8 +18,8 @@ import {
 } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import Link from "next/link";
-import DeleteTask from "./buttons";
-import { useToast } from "./ui/use-toast";
+import DeleteTask from "@/components/tasks/buttons";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function TasksTable({ tasks }: { tasks: Task[] }) {
   const { toast } = useToast();
