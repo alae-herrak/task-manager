@@ -21,10 +21,11 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
-import { createTask } from "@/lib/actions";
+import { editTask } from "@/lib/actions";
 import { Session } from "next-auth";
 import { useState } from "react";
 import { Loader } from "lucide-react";
+import { Task } from "@/lib/definitions";
 
 const formSchema = z.object({
   title: z
@@ -47,21 +48,21 @@ const formSchema = z.object({
     }),
 });
 
-function CreateForm({ session }: { session: Session | null }) {
+function CreateForm({ task }: { task: Task }) {
   const [creating, setCreating] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
-      priority: "low",
-      description: "",
+      title: task.title,
+      priority: task.priority,
+      description: task.description,
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     setCreating(true);
-    createTask({ ...values, session });
+    editTask({ id: task.id, ...values });
   }
 
   return (
@@ -120,7 +121,7 @@ function CreateForm({ session }: { session: Session | null }) {
           )}
         />
         <Button type="submit" disabled={creating}>
-          Create
+          Update
           <Loader
             className={`${!creating && "hidden"} ms-1 h-4 w-4 animate-spin`}
           />

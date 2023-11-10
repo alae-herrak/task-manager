@@ -7,7 +7,7 @@ export default async function NewTaskPage() {
   const session = await getServerSession(authOptions);
 
   return (
-    <main>
+    <>
       <Breadcrumbs
         breadcrumbs={[
           { label: "Tasks", href: "/dashboard/tasks" },
@@ -19,6 +19,6 @@ export default async function NewTaskPage() {
         ]}
       />
       <Form session={session} />
-    </main>
+    </>
   );
 }
