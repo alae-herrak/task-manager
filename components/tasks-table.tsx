@@ -43,64 +43,68 @@ export default function TasksTable({ tasks }: { tasks: Task[] }) {
   }
 
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-auto">Title</TableHead>
-          <TableHead className="w-[100px]">
-            <Button
-              className="bg-inherit p-0 text-inherit hover:bg-inherit hover:text-black dark:hover:text-white"
-              onClick={handleSortPriority}
-            >
-              Priority
-              <ArrowsUpDownIcon className="ms-1 h-4 w-4" />
-            </Button>
-          </TableHead>
-          <TableHead className="text-start">Description</TableHead>
-          <TableHead className="w-20">Action</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {data.map(
-          (task) =>
-            task.id !== deletedId && (
-              <TableRow key={task.id}>
-                <TableCell>{task.title}</TableCell>
-                <TableCell
-                  className={clsx(
-                    task.priority === "high"
-                      ? "text-red-500"
-                      : task.priority === "medium"
-                      ? "text-yellow-500"
-                      : "text-green-500",
-                  )}
-                >
-                  {task.priority}
-                </TableCell>
-                <TableCell className="text-start">{task.description}</TableCell>
-                <TableCell className="flex">
-                  <Link href={`/dashboard/tasks/${task.id}/edit`}>
-                    <Button variant="ghost">
-                      <PencilSquareIcon className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                  <div
-                    onClick={() =>
-                      setTimeout(() => {
-                        setDeletedId(task.id);
-                        toast({
-                          description: "Deleted Task.",
-                        });
-                      }, 100)
-                    }
+    tasks && (
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-auto">Title</TableHead>
+            <TableHead className="w-[100px]">
+              <Button
+                className="bg-inherit p-0 text-inherit hover:bg-inherit hover:text-black dark:hover:text-white"
+                onClick={handleSortPriority}
+              >
+                Priority
+                <ArrowsUpDownIcon className="ms-1 h-4 w-4" />
+              </Button>
+            </TableHead>
+            <TableHead className="text-start">Description</TableHead>
+            <TableHead className="w-20">Action</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {data.map(
+            (task) =>
+              task.id !== deletedId && (
+                <TableRow key={task.id}>
+                  <TableCell>{task.title}</TableCell>
+                  <TableCell
+                    className={clsx(
+                      task.priority === "high"
+                        ? "text-red-500"
+                        : task.priority === "medium"
+                        ? "text-yellow-500"
+                        : "text-green-500",
+                    )}
                   >
-                    <DeleteTask id={task.id} />
-                  </div>
-                </TableCell>
-              </TableRow>
-            ),
-        )}
-      </TableBody>
-    </Table>
+                    {task.priority}
+                  </TableCell>
+                  <TableCell className="text-start">
+                    {task.description}
+                  </TableCell>
+                  <TableCell className="flex">
+                    <Link href={`/dashboard/tasks/${task.id}/edit`}>
+                      <Button variant="ghost">
+                        <PencilSquareIcon className="h-4 w-4" />
+                      </Button>
+                    </Link>
+                    <div
+                      onClick={() =>
+                        setTimeout(() => {
+                          setDeletedId(task.id);
+                          toast({
+                            description: "Deleted Task.",
+                          });
+                        }, 100)
+                      }
+                    >
+                      <DeleteTask id={task.id} />
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ),
+          )}
+        </TableBody>
+      </Table>
+    )
   );
 }
