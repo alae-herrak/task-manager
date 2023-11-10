@@ -22,6 +22,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { createTask } from "@/lib/actions";
+import { Session } from "next-auth";
 
 const formSchema = z.object({
   title: z
@@ -44,24 +45,23 @@ const formSchema = z.object({
     }),
 });
 
-function CreateForm() {
+function CreateForm({ session }: { session: Session | null }) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
+      priority: "low",
+      description: "",
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    createTask(values)
+    createTask({ ...values, session });
   }
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-8"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
           name="title"
