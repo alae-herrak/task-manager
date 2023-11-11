@@ -79,7 +79,6 @@ export const columns: ColumnDef<Task>[] = [
     id: "actions",
     cell: ({ row }) => {
       const { id } = row.original;
-      const { toast } = useToast();
 
       return (
         <DropdownMenu>
@@ -95,17 +94,7 @@ export const columns: ColumnDef<Task>[] = [
               <Link href={`/dashboard/tasks/${id}/edit`}>Edit task</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <div
-                onClick={() =>
-                  setTimeout(() => {
-                    toast({
-                      description: "Deleted Task.",
-                    });
-                  }, 100)
-                }
-              >
-                <DeleteTaskButton id={id} />
-              </div>
+              <DeleteTaskButtonComponent id={id} />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -113,3 +102,21 @@ export const columns: ColumnDef<Task>[] = [
     },
   },
 ];
+
+function DeleteTaskButtonComponent({ id }: { id: string }) {
+  const { toast } = useToast();
+
+  return (
+    <div
+      onClick={() =>
+        setTimeout(() => {
+          toast({
+            description: "Deleted Task.",
+          });
+        }, 100)
+      }
+    >
+      <DeleteTaskButton id={id} />
+    </div>
+  );
+}
