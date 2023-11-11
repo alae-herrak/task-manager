@@ -14,7 +14,6 @@ import { Button } from "@/components/ui/button";
 import {
   ArrowsUpDownIcon,
   PencilSquareIcon,
-  TrashIcon,
 } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import Link from "next/link";
@@ -31,11 +30,11 @@ export default function TasksTable({ tasks }: { tasks: Task[] }) {
   function handleSortPriority() {
     const sorted = [
       ...data.filter(
-        (e) => e.priority === (sortDirection === "htl" ? "high" : "low"),
+        (e) => e.priority === (sortDirection === "htl" ? "Urgent" : "Low"),
       ),
-      ...data.filter((e) => e.priority === "medium"),
+      ...data.filter((e) => e.priority === "Medium"),
       ...data.filter(
-        (e) => e.priority === (sortDirection === "htl" ? "low" : "high"),
+        (e) => e.priority === (sortDirection === "htl" ? "Low" : "Urgent"),
       ),
     ];
     setData(sorted);
@@ -68,9 +67,9 @@ export default function TasksTable({ tasks }: { tasks: Task[] }) {
                 <TableCell>{task.title}</TableCell>
                 <TableCell
                   className={clsx(
-                    task.priority === "high"
+                    task.priority === "Urgent"
                       ? "text-red-500"
-                      : task.priority === "medium"
+                      : task.priority === "Medium"
                       ? "text-yellow-500"
                       : "text-green-500",
                   )}

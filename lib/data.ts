@@ -4,6 +4,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  orderBy,
   query,
   where,
 } from "firebase/firestore";
@@ -16,7 +17,11 @@ export async function fetchUserTasks(userId: string) {
   try {
     let tasks: Task[] = [];
 
-    const q = query(collection(db, "tasks"), where("userId", "==", userId));
+    const q = query(
+      collection(db, "tasks"),
+      where("userId", "==", userId),
+      orderBy("priority", "desc"),
+    );
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       tasks.push({ id: doc.id, ...doc.data() } as Task);

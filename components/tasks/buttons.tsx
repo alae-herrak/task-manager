@@ -1,5 +1,3 @@
-import { TrashIcon } from "@heroicons/react/24/solid";
-import { Button } from "@/components/ui/button";
 import { deleteTask } from "@/lib/actions";
 
 export default function DeleteTaskButton({ id }: { id: string }) {
@@ -7,9 +5,7 @@ export default function DeleteTaskButton({ id }: { id: string }) {
 
   return (
     <form action={deleteTaskWithId}>
-      <Button variant="ghost">
-        <TrashIcon className="h-4 w-4 text-red-500" />
-      </Button>
+      <button className="text-red-500">Delete task</button>
     </form>
   );
 }

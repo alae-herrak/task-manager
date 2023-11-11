@@ -33,7 +33,7 @@ const formSchema = z.object({
       message: "Title must be at least 2 characters.",
     })
     .max(50, { message: "Title cannot be more than 50 characters." }),
-  priority: z.enum(["low", "medium", "high"], {
+  priority: z.enum(["Low", "Medium", "Urgent"], {
     required_error: "Priority is required.",
     invalid_type_error: "Please select a valid priority.",
   }),
@@ -93,9 +93,9 @@ export default function EditTaskForm({ task }: { task: Task }) {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="low">🟢 Low</SelectItem>
-                  <SelectItem value="medium">🟡 Medium</SelectItem>
-                  <SelectItem value="high">🔴 High</SelectItem>
+                  <SelectItem value="Low">🟢 Low</SelectItem>
+                  <SelectItem value="Medium">🟡 Medium</SelectItem>
+                  <SelectItem value="Urgent">🔴 Urgent</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />

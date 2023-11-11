@@ -1,9 +1,14 @@
 "use server";
 
-import { authOptions } from "@/auth";
 import { db } from "@/firebase";
-import { addDoc, collection, deleteDoc, doc, updateDoc } from "firebase/firestore";
-import { Session, getServerSession } from "next-auth";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
+import { Session } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
@@ -14,11 +19,12 @@ export async function createTask({
   session,
 }: {
   title: string;
-  priority: "low" | "medium" | "high";
+  priority: "Low" | "Medium" | "Urgent";
   description: string;
   session: Session | null;
 }) {
   const tasksCollectionRef = collection(db, "tasks");
+  const date = new Date().toISOString().split("T")[0];
 
   try {
     await addDoc(tasksCollectionRef, {
@@ -26,6 +32,8 @@ export async function createTask({
       priority,
       description,
       userId: session?.user.id,
+      createdAt: date,
+      updatedAt: date,
     });
   } catch (error) {
     return {
@@ -45,16 +53,18 @@ export async function editTask({
 }: {
   id: string;
   title: string;
-  priority: "low" | "medium" | "high";
+  priority: "Low" | "Medium" | "Urgent";
   description: string;
 }) {
   const taskDocRef = doc(db, "tasks", id);
+  const date = new Date().toISOString().split("T")[0];
 
   try {
     await updateDoc(taskDocRef, {
       title,
       priority,
       description,
+      updatedAt: date,
     });
   } catch (error) {
     return {
