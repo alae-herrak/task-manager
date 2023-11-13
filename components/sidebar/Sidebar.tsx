@@ -17,7 +17,7 @@ export default function Sidebar({ session }: { session: Session | null }) {
     <div className="w-full shadow-xl dark:bg-gradient-to-br dark:from-slate-900 dark:to-slate-700 lg:h-screen lg:max-w-[23rem] lg:p-4">
       <div className="flex h-full flex-col">
         <div className="flex items-center justify-between p-2 text-xl font-semibold lg:mb-2 lg:p-4">
-          Task Manager
+          TaskSwift
           <div className="flex items-center gap-2">
             <UserButton session={session} />
             <ThemeToggle />

@@ -9,7 +9,7 @@ import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Tast Manager",
+  title: "TastSwift",
   description: "Manage your daily tasks all in one place",
 };
 
