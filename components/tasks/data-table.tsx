@@ -30,6 +30,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { markTaskDone } from "@/lib/actions";
+import { Task } from "@/lib/definitions";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -43,6 +45,7 @@ export function DataTable<TData, TValue>({
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = useState({});
 
   const table = useReactTable({
     data,
@@ -53,12 +56,20 @@ export function DataTable<TData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
+      rowSelection,
     },
   });
+
+  const handleMarkDone = () => {
+    const indexes = Object.keys(rowSelection);
+    indexes.map((i: string) => markTaskDone((data[parseInt(i)] as Task).id));
+    setRowSelection({});
+  };
 
   return (
     <div className="px-1">
@@ -80,9 +91,7 @@ export function DataTable<TData, TValue>({
           <DropdownMenuContent align="end">
             {table
               .getAllColumns()
-              .filter(
-                (column) => column.getCanHide()
-              )
+              .filter((column) => column.getCanHide())
               .map((column) => {
                 return (
                   <DropdownMenuCheckboxItem
@@ -95,11 +104,18 @@ export function DataTable<TData, TValue>({
                   >
                     {column.id}
                   </DropdownMenuCheckboxItem>
-                )
+                );
               })}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+      {Object.keys(rowSelection).length ? (
+        <div className="mb-4">
+          <Button variant="secondary" onClick={handleMarkDone}>
+            Mark Done
+          </Button>
+        </div>
+      ) : null}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -160,6 +176,10 @@ export function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
+      </div>
+      <div className="mt-3 flex-1 text-sm text-muted-foreground">
+        {table.getFilteredSelectedRowModel().rows.length} of{" "}
+        {table.getFilteredRowModel().rows.length} row(s) selected.
       </div>
     </div>
   );

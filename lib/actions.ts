@@ -34,6 +34,7 @@ export async function createTask({
       userId: session?.user.id,
       createdAt: date,
       updatedAt: date,
+      status: "ongoing",
     });
   } catch (error) {
     return {
@@ -84,4 +85,21 @@ export async function deleteTask(id: string) {
   } catch (error) {
     return { message: "Database Error: Failed to Delete Task." };
   }
+}
+
+export async function markTaskDone(id: string) {
+  const taskDocRef = doc(db, "tasks", id);
+
+  try {
+    await updateDoc(taskDocRef, {
+      status: "done"
+    });
+  } catch (error) {
+    return {
+      message: "Database Error: Failed to Create Task.",
+    };
+  }
+
+  revalidatePath("/dashboard/tasks");
+  redirect("/dashboard/tasks");
 }

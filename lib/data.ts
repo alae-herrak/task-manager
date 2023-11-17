@@ -20,6 +20,7 @@ export async function fetchUserTasks(userId: string) {
     const q = query(
       collection(db, "tasks"),
       where("userId", "==", userId),
+      where("status", "==", "ongoing"),
       orderBy("priority", "desc"),
     );
     const querySnapshot = await getDocs(q);

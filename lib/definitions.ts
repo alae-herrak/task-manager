@@ -6,4 +6,5 @@ export type Task = {
   userId: string;
   createdAt?: string;
   updatedAt?: string;
+  status?: "ongoing" | "done";
 };

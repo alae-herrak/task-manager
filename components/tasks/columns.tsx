@@ -10,9 +10,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import DeleteTaskButton from "./buttons";
+import { Checkbox } from "@/components/ui/checkbox";
+import DeleteTaskButton from "@/components/tasks/buttons";
 import Link from "next/link";
-import { useToast } from "../ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 
 export type Task = {
   id: string;
@@ -24,6 +25,25 @@ export type Task = {
 };
 
 export const columns: ColumnDef<Task>[] = [
+  {
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={table.getIsAllPageRowsSelected()}
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
   {
     accessorKey: "title",
     header: "Title",
@@ -91,7 +111,9 @@ export const columns: ColumnDef<Task>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem>
-              <Link href={`/dashboard/tasks/${id}/edit`}>Edit task</Link>
+              <Link href={`/dashboard/tasks/${id}/edit`} className="w-full">
+                Edit task
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
               <DeleteTaskButtonComponent id={id} />
@@ -108,6 +130,7 @@ function DeleteTaskButtonComponent({ id }: { id: string }) {
 
   return (
     <div
+      className="w-full"
       onClick={() =>
         setTimeout(() => {
           toast({
