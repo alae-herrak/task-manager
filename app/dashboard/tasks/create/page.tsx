@@ -1,6 +1,6 @@
 import { authOptions } from "@/auth";
-import Breadcrumbs from "@/components/breadcrumbs";
-import CreateTaskForm from "@/components/tasks/CreateTaskForm";
+import Breadcrumbs from "@/app/components/breadcrumbs";
+import CreateTaskForm from "@/app/components/tasks/CreateTaskForm";
 import { getServerSession } from "next-auth";
 
 export default async function NewTaskPage() {

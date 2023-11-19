@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/app/components/ui/button";
 import {
   Form,
   FormControl,
@@ -11,20 +11,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from "@/app/components/ui/form";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
-import { Input } from "@/components/ui/input";
-import { createTask } from "@/lib/actions";
-import { Session } from "next-auth";
+} from "@/app/components/ui/select";
+import { Textarea } from "@/app/components/ui/textarea";
+import { Input } from "@/app/components/ui/input";
+import { editTask } from "@/app/lib/actions";
 import { useState } from "react";
 import { Loader } from "lucide-react";
+import { Task } from "@/app/lib/definitions";
 
 const formSchema = z.object({
   title: z
@@ -47,25 +47,21 @@ const formSchema = z.object({
     }),
 });
 
-export default function CreateTaskForm({
-  session,
-}: {
-  session: Session | null;
-}) {
+export default function EditTaskForm({ task }: { task: Task }) {
   const [creating, setCreating] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: "",
-      priority: "Low",
-      description: "",
+      title: task.title,
+      priority: task.priority,
+      description: task.description,
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     setCreating(true);
-    createTask({ ...values, session });
+    editTask({ id: task.id, ...values });
   }
 
   return (
@@ -124,7 +120,7 @@ export default function CreateTaskForm({
           )}
         />
         <Button type="submit" disabled={creating}>
-          Create
+          Update
           <Loader
             className={`${!creating && "hidden"} ms-1 h-4 w-4 animate-spin`}
           />

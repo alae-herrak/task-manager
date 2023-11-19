@@ -19,19 +19,19 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/app/components/ui/table";
 import clsx from "clsx";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/app/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/app/components/ui/dropdown-menu";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { markTaskDone } from "@/lib/actions";
-import { Task } from "@/lib/definitions";
+import { Button } from "@/app/components/ui/button";
+import { markTaskDone } from "@/app/lib/actions";
+import { Task } from "@/app/lib/definitions";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -111,8 +111,8 @@ export function DataTable<TData, TValue>({
       </div>
       {Object.keys(rowSelection).length ? (
         <div className="mb-4">
-          <Button variant="secondary" onClick={handleMarkDone}>
-            Mark Done
+          <Button variant="secondary" onClick={handleMarkDone} className="px-2 py-1">
+            ✔️ Mark Done
           </Button>
         </div>
       ) : null}

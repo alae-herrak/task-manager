@@ -9,8 +9,8 @@ import {
   PresentationChartBarIcon,
   ClipboardDocumentListIcon,
 } from "@heroicons/react/24/solid";
-import { ThemeToggle } from "@/components/sidebar/ThemeToggle";
-import UserButton from "@/components/sidebar/UserButton";
+import { ThemeToggle } from "@/app/components/sidebar/ThemeToggle";
+import UserButton from "@/app/components/sidebar/UserButton";
 
 export default function Sidebar({ session }: { session: Session | null }) {
   return (

@@ -1,5 +1,6 @@
-import Tasks from "@/components/tasks/Tasks";
-import { Button } from "@/components/ui/button";
+import Tasks from "@/app/components/tasks/Tasks";
+import TasksSkeleton from "@/app/components/tasks/TasksSkeleton";
+import { Button } from "@/app/components/ui/button";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { Suspense } from "react";
@@ -18,7 +19,7 @@ export default async function TasksPage() {
         </Link>
       </div>
       <div className="mt-5 overflow-y-auto">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<TasksSkeleton />}>
           <Tasks />
         </Suspense>
       </div>

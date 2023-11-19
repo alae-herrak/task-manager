@@ -2,18 +2,18 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/app/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Checkbox } from "@/components/ui/checkbox";
-import DeleteTaskButton from "@/components/tasks/buttons";
+} from "@/app/components/ui/dropdown-menu";
+import { Checkbox } from "@/app/components/ui/checkbox";
+import DeleteTaskButton from "@/app/components/tasks/buttons";
 import Link from "next/link";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/app/components/ui/use-toast";
 
 export type Task = {
   id: string;

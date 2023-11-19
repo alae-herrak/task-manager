@@ -8,9 +8,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getInitials } from "@/lib/utils";
+} from "@/app/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "@/app/components/ui/avatar";
+import { getInitials } from "@/app/lib/utils";
 import { signOut } from "next-auth/react";
 
 export default function UserButton({ session }: { session: Session | null }) {

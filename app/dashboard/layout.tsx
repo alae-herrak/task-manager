@@ -1,5 +1,5 @@
 import { authOptions } from "@/auth";
-import Sidebar from "@/components/sidebar/Sidebar";
+import Sidebar from "@/app/components/sidebar/Sidebar";
 import { getServerSession } from "next-auth";
 
 export default async function layout({

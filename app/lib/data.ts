@@ -9,7 +9,7 @@ import {
   where,
 } from "firebase/firestore";
 import { unstable_noStore as noStore } from "next/cache";
-import { Task } from "./definitions";
+import { Task } from "@/app/lib/definitions";
 
 export async function fetchUserTasks(userId: string) {
   noStore();

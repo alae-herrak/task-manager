@@ -1,4 +1,4 @@
-import { deleteTask } from "@/lib/actions";
+import { deleteTask } from "@/app/lib/actions";
 
 export default function DeleteTaskButton({ id }: { id: string }) {
   const deleteTaskWithId = deleteTask.bind(null, id);
