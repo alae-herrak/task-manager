@@ -2,8 +2,8 @@ import { authOptions } from "@/auth";
 import { fetchUserTasks } from "@/app/lib/data";
 import { getServerSession } from "next-auth";
 
-import { columns } from "./columns";
-import { DataTable } from "./data-table";
+import { columns } from "@/app/components/tasks/columns";
+import { DataTable } from "@/app/components/tasks/data-table";
 
 export default async function Tasks() {
   const session = await getServerSession(authOptions);

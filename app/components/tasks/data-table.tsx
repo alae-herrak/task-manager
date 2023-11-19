@@ -11,7 +11,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-
 import {
   Table,
   TableBody,
@@ -32,6 +31,7 @@ import { useState } from "react";
 import { Button } from "@/app/components/ui/button";
 import { markTaskDone } from "@/app/lib/actions";
 import { Task } from "@/app/lib/definitions";
+import { CheckIcon } from "@heroicons/react/24/solid";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -111,8 +111,12 @@ export function DataTable<TData, TValue>({
       </div>
       {Object.keys(rowSelection).length ? (
         <div className="mb-4">
-          <Button variant="secondary" onClick={handleMarkDone} className="px-2 py-1">
-            ✔️ Mark Done
+          <Button
+            variant="secondary"
+            onClick={handleMarkDone}
+            className="px-2 py-1"
+          >
+            <CheckIcon className="h-4 w-4 me-1" /> Mark Done
           </Button>
         </div>
       ) : null}
